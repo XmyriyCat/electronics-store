@@ -19,38 +19,40 @@ namespace Data.Repositories.Contracts
             this.table = context.Set<T>() ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async virtual Task Delete(int id)
+        public async virtual Task AsyncDelete(int id)
         {
             T entity = await table.FindAsync(id) ?? throw new NoSuchEntityFoundException();
             table.Remove(entity);
         }
 
-        public async virtual Task<IEnumerable<T>> GetAll()
+        public async virtual Task<IEnumerable<T>> AsyncGetAll()
         {
             return await table.ToArrayAsync();
         }
 
-        public async virtual Task<T> GetById(int id)
+        public async virtual Task<T> AsyncGetById(int id)
         {
             return await table.FindAsync(id) ?? throw new NoSuchEntityFoundException();
         }
 
-        public async virtual Task Insert(T entity)
+        public async virtual Task<T> AsyncInsert(T entity)
         {
             await table.AddAsync(entity);
+            return entity;
         }
 
-        public async virtual Task Save()
+        public async virtual Task AsyncSave()
         {
             await context.SaveChangesAsync();
         }
 
-        public virtual void Update(T entity)
+        public virtual T Update(T entity)
         {
             // TODO: This part should be refactored.
 
             table.Attach(entity);
             context.Entry(entity).State = EntityState.Modified;
+            return entity;
         }
     }
 }

@@ -8,16 +8,16 @@ namespace Data.Repositories.Contracts
 {
     public interface IRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAll();
+        Task<IEnumerable<T>> AsyncGetAll();
 
-        Task<T> GetById(int id);
+        Task<T> AsyncGetById(int id);
 
-        Task Insert(T entity);
+        Task<T> AsyncInsert(T entity);
 
-        void Update(T entity);
+        T Update(T entity);
 
-        Task Delete(int id);
+        Task AsyncDelete(int id);
 
-        Task Save();
+        Task AsyncSave();
     }
 }
