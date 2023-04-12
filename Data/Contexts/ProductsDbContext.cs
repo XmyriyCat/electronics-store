@@ -1,10 +1,6 @@
 ﻿using DomainModels;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Data
 {
@@ -15,34 +11,34 @@ namespace Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            if (this.Database.GetPendingMigrations().Any())
-            {
-                this.Database.Migrate();
-            }
+            base.OnModelCreating(builder);
+
+            // Configure all model configurations that implements interface IEntityTypeConfiguration<T> from Assembly
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-        public virtual DbSet<Category> Categories { get => this.Set<Category>(); }
+        public virtual DbSet<Category> Categories { get; }
 
-        public virtual DbSet<Customer> Customers { get => this.Set<Customer>(); }
+        public virtual DbSet<Customer> Customers { get; }
 
-        public virtual DbSet<Delivery> Deliveries { get => this.Set<Delivery>(); }
+        public virtual DbSet<Delivery> Deliveries { get ; }
 
-        public virtual DbSet<Manager> Managers { get => this.Set<Manager>(); }
+        public virtual DbSet<Manager> Managers { get ; }
 
-        public virtual DbSet<Manufacturer> Manufacturers { get => this.Set<Manufacturer>(); }
+        public virtual DbSet<Manufacturer> Manufacturers { get ; }
 
-        public virtual DbSet<OrderedProduct> OrderedProducts { get => this.Set<OrderedProduct>(); }
+        public virtual DbSet<OrderedProduct> OrderedProducts { get ; }
 
-        public virtual DbSet<PaymentWay> PaymentWays { get => this.Set<PaymentWay>(); }
+        public virtual DbSet<PaymentWay> PaymentWays { get ; }
 
-        public virtual DbSet<PictureProduct> PictureProducts { get => this.Set<PictureProduct>(); }
+        public virtual DbSet<PictureProduct> PictureProducts { get ; }
 
-        public virtual DbSet<Product> Products { get => this.Set<Product>(); }
+        public virtual DbSet<Product> Products { get ; }
 
-        public virtual DbSet<Shipment> Shipments { get => this.Set<Shipment>(); }
+        public virtual DbSet<Shipment> Shipments { get ; }
 
-        public virtual DbSet<Warehouse> Warehouses { get => this.Set<Warehouse>(); }
+        public virtual DbSet<Warehouse> Warehouses { get ; }
     }
 }

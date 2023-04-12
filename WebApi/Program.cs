@@ -1,17 +1,11 @@
-using Data;
-using Microsoft.EntityFrameworkCore;
+using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ProductsDbContext>(opts =>
-{
-    opts.UseSqlServer(builder.Configuration["ConnectionStrings:ElectronicsStoreConnection"]);
-});
-
 builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.ConfigureDbConnection(builder.Configuration);
 
 var app = builder.Build();
 
