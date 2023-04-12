@@ -11,14 +11,6 @@ namespace Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (this.Database.GetPendingMigrations().Any())
-            {
-                this.Database.Migrate();
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
