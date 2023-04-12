@@ -13,15 +13,15 @@ public class Product
 
     public int Quantity { get; set; }
 
-    public string? Description { get; set; }
+    public string Description { get; set; }
 
     public int IdCategory { get; set; }
 
     public int IdManufacturer { get; set; }
 
-    public virtual Category? IdCategoryNavigation { get; set; }
+    public virtual Category IdCategoryNavigation { get; set; }
 
-    public virtual Manufacturer? IdManufacturerNavigation { get; set; }
+    public virtual Manufacturer IdManufacturerNavigation { get; set; }
 
     public virtual ICollection<OrderedProduct> OrderedProducts { get; } = new List<OrderedProduct>();
 

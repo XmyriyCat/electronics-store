@@ -13,5 +13,5 @@ public class PictureProduct
 
     public string PicturePath { get; set; } = string.Empty;
 
-    public virtual Product? IdProductNavigation { get; set; }
+    public virtual Product IdProductNavigation { get; set; }
 }

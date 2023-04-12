@@ -11,7 +11,7 @@ public class Delivery
 
     public double Cost { get; set; }
 
-    public string? Description { get; set; }
+    public string Description { get; set; }
 
     public virtual ICollection<Shipment> Shipments { get; } = new List<Shipment>();
 }
