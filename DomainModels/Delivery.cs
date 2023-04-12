@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AdminPanel.ModelsDb;
+namespace DomainModels;
 
 public class Delivery
 {
