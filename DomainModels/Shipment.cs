@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DomainModels;
+﻿namespace DomainModels;
 
 public class Shipment
 {
@@ -17,11 +14,11 @@ public class Shipment
 
     public int IdDelivery { get; set; }
 
-    public virtual Delivery? IdDeliveryNavigation { get; set; }
+    public virtual Delivery IdDeliveryNavigation { get; set; }
 
-    public virtual PaymentWay? IdPaymentWayNavigation { get; set; }
+    public virtual PaymentWay IdPaymentWayNavigation { get; set; }
 
-    public virtual Warehouse? IdWarehouseNavigation { get; set; }
+    public virtual Warehouse IdWarehouseNavigation { get; set; }
 
     public virtual ICollection<OrderedProduct> OrderedProducts { get; } = new List<OrderedProduct>();
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DomainModels;
+﻿namespace DomainModels;
 
 public class Delivery
 {
@@ -11,7 +8,7 @@ public class Delivery
 
     public double Cost { get; set; }
 
-    public string? Description { get; set; }
+    public string Description { get; set; }
 
     public virtual ICollection<Shipment> Shipments { get; } = new List<Shipment>();
 }

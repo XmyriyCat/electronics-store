@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DomainModels;
+﻿namespace DomainModels;
 
 public class Customer
 {
@@ -9,7 +6,7 @@ public class Customer
 
     public string Name { get; set; } = string.Empty;
 
-    public string? PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
 
     public string Address { get; set; } = string.Empty;
 
