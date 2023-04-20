@@ -1,8 +1,8 @@
-﻿using DomainModels;
+﻿using System.Reflection;
+using DomainModels;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
-namespace Data
+namespace Data.Contexts
 {
     public class ProductsDbContext : DbContext
     {

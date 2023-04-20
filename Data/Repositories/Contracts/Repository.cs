@@ -1,57 +1,58 @@
-﻿using Data.Exceptions;
+﻿using System.Linq.Expressions;
+using Data.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Repositories.Contracts
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {
-        protected DbContext context;
-        protected DbSet<T> table;
+        protected readonly DbContext Context;
+        
+        protected readonly DbSet<T> Table;
 
         protected Repository(DbContext context)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
-            this.table = context.Set<T>() ?? throw new ArgumentNullException(nameof(context));
+            Context = context ?? throw new ArgumentNullException(nameof(context));
+            Table = context.Set<T>();
+        }
+        
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        {
+            var entities = await Table
+                .AsNoTracking()
+                .ToArrayAsync();
+
+            return entities;
         }
 
-        public async virtual Task AsyncDelete(int id)
+        public virtual async Task<T> GetByIdAsync(int id)
         {
-            T entity = await table.FindAsync(id) ?? throw new NoSuchEntityFoundException();
-            table.Remove(entity);
+            return await Table.FindAsync(id) ?? throw new NoSuchEntityFoundException();
         }
 
-        public async virtual Task<IEnumerable<T>> AsyncGetAll()
+        public virtual async Task<T> InsertAsync(T entity)
         {
-            return await table.ToArrayAsync();
-        }
-
-        public async virtual Task<T> AsyncGetById(int id)
-        {
-            return await table.FindAsync(id) ?? throw new NoSuchEntityFoundException();
-        }
-
-        public async virtual Task<T> AsyncInsert(T entity)
-        {
-            await table.AddAsync(entity);
+            await Table.AddAsync(entity);
             return entity;
-        }
-
-        public async virtual Task AsyncSave()
-        {
-            await context.SaveChangesAsync();
         }
 
         public virtual T Update(T entity)
         {
-            // TODO: This part should be refactored.
+            var updatingResult = Table.Update(entity);
 
-            table.Attach(entity);
-            context.Entry(entity).State = EntityState.Modified;
+            return updatingResult.Entity;
+        }
+        
+        public virtual async Task DeleteAsync(int id)
+        {
+            var entity = await Table.FindAsync(id) ?? throw new NoSuchEntityFoundException();
+            Table.Remove(entity);
+        }
+
+        public virtual async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> expression)
+        {
+            var entity = await Table.FirstOrDefaultAsync(expression);
+
             return entity;
         }
     }

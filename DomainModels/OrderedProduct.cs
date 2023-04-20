@@ -6,7 +6,7 @@ public class OrderedProduct
 
     public int Quantity { get; set; }
 
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     public int IdProduct { get; set; }
 

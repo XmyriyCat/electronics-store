@@ -6,9 +6,9 @@ public class Delivery
 
     public string Name { get; set; } = string.Empty;
 
-    public double Cost { get; set; }
+    public double Cost { get; set; } 
 
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     public virtual ICollection<Shipment> Shipments { get; } = new List<Shipment>();
 }

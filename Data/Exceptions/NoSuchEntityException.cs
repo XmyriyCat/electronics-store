@@ -12,10 +12,6 @@ namespace Data.Exceptions
     {
         public override string Message { get => "No such entity found."; }
 
-        public NoSuchEntityFoundException()
-        {
-        }
-
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
