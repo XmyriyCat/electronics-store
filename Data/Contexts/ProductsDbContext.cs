@@ -1,8 +1,8 @@
-﻿using DomainModels;
+﻿using System.Reflection;
+using DomainModels;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
-namespace Data
+namespace Data.Contexts
 {
     public class ProductsDbContext : DbContext
     {
@@ -23,22 +23,22 @@ namespace Data
 
         public virtual DbSet<Customer> Customers { get; }
 
-        public virtual DbSet<Delivery> Deliveries { get ; }
+        public virtual DbSet<Delivery> Deliveries { get; }
 
-        public virtual DbSet<Manager> Managers { get ; }
+        public virtual DbSet<Manager> Managers { get; }
 
-        public virtual DbSet<Manufacturer> Manufacturers { get ; }
+        public virtual DbSet<Manufacturer> Manufacturers { get; }
 
-        public virtual DbSet<OrderedProduct> OrderedProducts { get ; }
+        public virtual DbSet<OrderedProduct> OrderedProducts { get; }
 
-        public virtual DbSet<PaymentWay> PaymentWays { get ; }
+        public virtual DbSet<PaymentWay> PaymentWays { get; }
 
-        public virtual DbSet<PictureProduct> PictureProducts { get ; }
+        public virtual DbSet<PictureProduct> PictureProducts { get; }
 
-        public virtual DbSet<Product> Products { get ; }
+        public virtual DbSet<Product> Products { get; }
 
-        public virtual DbSet<Shipment> Shipments { get ; }
+        public virtual DbSet<Shipment> Shipments { get; }
 
-        public virtual DbSet<Warehouse> Warehouses { get ; }
+        public virtual DbSet<Warehouse> Warehouses { get; }
     }
 }
