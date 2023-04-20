@@ -36,6 +36,14 @@ public class Result<T> : Result
         set => _value = value;
     }
 
+    public Result() : base()
+    {
+    }
+    
+    public Result(Exception exception) : base(exception)
+    {
+    }
+    
     public T Value
     {
         get
